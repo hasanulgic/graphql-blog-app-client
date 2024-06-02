@@ -21,7 +21,7 @@ const Signin = () => {
             <label htmlFor="">Your Password</label>
             <input name="password" type="password" />
 
-            <button className="rounded-full p-2 bg-white text-black">
+            <button type='submit' className="rounded-full p-2 bg-white text-black">
               Login
             </button>
           </form>
