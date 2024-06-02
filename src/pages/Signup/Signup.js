@@ -21,8 +21,6 @@ const Signup = () => {
   const [dataError, setDataError] = useState("");
   const [signUp, { data, loading, error }] = useMutation(SIGNUP);
 
-    // console.log(data);
-
     const handleRegister = (e) => {
         e.preventDefault();
         const data = {
@@ -47,10 +45,17 @@ const Signup = () => {
       }
     }, [data])
 
+    useEffect(()=> {
+      if(error){
+        setDataError(error.message)
+      }
+    }, [error])
+
     return (
       <>
         <Home />
-
+        <h1 className="text-center font-bold text-5xl my-4 pb-4">Register</h1>
+        <hr />
         <div className="form">
           <form onSubmit={handleRegister}>
             <label htmlFor="">Your Name</label>
@@ -62,13 +67,18 @@ const Signup = () => {
             <label htmlFor="">Your Bio</label>
             <input name="bio" type="text" />
             <button
+              disabled={loading}
               type="submit"
-              className="rounded-full p-2 bg-white text-black"
+              className={`rounded-full p-2 text-black ${
+                loading ? "bg-gray-400" : "bg-white"
+              }`}
             >
               Register
             </button>
             {dataError && (
-              <p className="text-center text-red-500 mt-8 font-medium">{dataError}</p>
+              <p className="text-center text-red-500 mt-8 font-medium">
+                {dataError}
+              </p>
             )}
           </form>
         </div>
